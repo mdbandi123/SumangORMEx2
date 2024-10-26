@@ -5,9 +5,15 @@ import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedNativeQueries;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+@NamedNativeQueries(value = {
+		@NamedNativeQuery(name = "getTeacherCountAndAvgSalPerDept",query = "select a.dept_name, count(b.name), coalesce(avg(b.salary),0.0) from department a left join instructor b on a.dept_name = b.dept_name group by a.dept_name;"),
+		@NamedNativeQuery(name = "getTeacherCountPerDept",query = "select a.dept_name, count(b.name) from department a left join instructor b on a.dept_name = b.dept_name group by a.dept_name;")
+})
 @Entity
 @Table(catalog = "university")
 public class Department {
