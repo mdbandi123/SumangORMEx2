@@ -24,8 +24,50 @@ public class TeacherDao {
 					sess.createNamedMutationQuery("updateSalarySetToFortyFiveK");
 			query.setParameter("nsalary", newSalary);
 			int rows = query.executeUpdate();
+			
 			txn.commit();
+			
 			LOGGER.info("executed updateSalarySetToFortyFiveK() successfully");
+			LOGGER.info("Updated %d records".formatted(rows));
+			return true;
+		} catch (Exception e) {
+			try {
+				LOGGER.error("encountered exception: %s".formatted(e));
+				LOGGER.info("rollback executing...");
+				txn.rollback();
+			} catch (Exception ee) {
+				LOGGER.error("encountered exception: %s".formatted(ee));
+				ee.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				LOGGER.info("session closing...");
+				sess.close();
+			} catch (Exception eee) {
+				LOGGER.error("encountered exception: %s".formatted(eee));
+				eee.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateBiologySalaryAddFiveK() {
+		LOGGER.info("executing updateBiologySalaryAddFiveK()...");
+		Double addAmt = 5000.00;
+		String deptName = "Biology";
+		Session sess = sf.openSession();
+		Transaction txn = sess.beginTransaction();
+		try {
+			MutationQuery query = 
+					sess.createNamedMutationQuery("updateBiologySalaryAddFiveK");
+			query.setParameter("addamt", addAmt);
+			query.setParameter("deptname", deptName);
+			int rows = query.executeUpdate();
+			
+			txn.commit();
+			
+			LOGGER.info("executed updateBiologySalaryAddFiveK() successfully");
 			LOGGER.info("Updated %d records".formatted(rows));
 			return true;
 		} catch (Exception e) {

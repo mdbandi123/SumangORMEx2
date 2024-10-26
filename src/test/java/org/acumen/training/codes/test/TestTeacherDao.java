@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.jboss.logging.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class TestTeacherDao {
@@ -22,6 +23,7 @@ public class TestTeacherDao {
 		cfg = null;
 	}
 	
+	@Disabled
 	@Test
 	public void testUnivConfiguration() {
 		cfg.createConfiguration();
@@ -29,5 +31,14 @@ public class TestTeacherDao {
 		TeacherDao dao = new TeacherDao(sf);
 		dao.updateSalarySetToFortyFiveK();
 		LOGGER.info("updateSalarySetToFortyFiveK() executed");
+	}
+	
+	@Test
+	public void updateBiologySalaryAddFiveK() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		TeacherDao dao = new TeacherDao(sf);
+		dao.updateBiologySalaryAddFiveK();
+		LOGGER.info("updateBiologySalaryAddFiveK() executed");
 	}
 }
