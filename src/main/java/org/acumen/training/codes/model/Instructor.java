@@ -21,6 +21,7 @@ public class Instructor {
 	private Double salary;
 	
 	private Set<Teaches> teaches;
+	private Set<Advisor> advisors;
 	
 	private Department department;
 
@@ -78,6 +79,15 @@ public class Instructor {
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+	
+	@OneToMany(mappedBy = "instructor")
+	public Set<Advisor> getAdvisors() {
+		return advisors;
+	}
+
+	public void setAdvisors(Set<Advisor> advisors) {
+		this.advisors = advisors;
 	}
 	
 	@Override

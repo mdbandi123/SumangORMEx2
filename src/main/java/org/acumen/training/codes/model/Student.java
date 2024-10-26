@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +21,7 @@ public class Student {
 	
 	private Department department;
 	private Set<Takes> takes;
+	private Advisor advisor;
 
 	@Id
 	@Column(name = "id", unique = true, length = 5)
@@ -75,6 +77,15 @@ public class Student {
 
 	public void setTakes(Set<Takes> takes) {
 		this.takes = takes;
+	}
+	
+	@OneToOne(mappedBy = "student")
+	public Advisor getAdvisor() {
+		return advisor;
+	}
+
+	public void setAdvisor(Advisor advisor) {
+		this.advisor = advisor;
 	}
 	
 	@Override
