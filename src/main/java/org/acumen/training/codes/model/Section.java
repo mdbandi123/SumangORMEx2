@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +23,8 @@ public class Section {
 	private String timeSlotId;
 
 	private Set<Classroom> classrooms;
+	
+	private Takes take;
 
 	@EmbeddedId
 	public SectionId getIds() {
@@ -71,6 +74,15 @@ public class Section {
 
 	public void setClassrooms(Set<Classroom> classrooms) {
 		this.classrooms = classrooms;
+	}
+	
+	@OneToOne(mappedBy = "section")
+	public Takes getTake() {
+		return take;
+	}
+
+	public void setTake(Takes take) {
+		this.take = take;
 	}
 
 	@Override

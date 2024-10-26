@@ -1,10 +1,13 @@
 package org.acumen.training.codes.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +19,7 @@ public class Student {
 	private Integer totCred;
 	
 	private Department department;
+	private Set<Takes> takes;
 
 	@Id
 	@Column(name = "id", unique = true, length = 5)
@@ -62,6 +66,15 @@ public class Student {
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+	
+	@OneToMany(mappedBy = "student")
+	public Set<Takes> getTakes() {
+		return takes;
+	}
+
+	public void setTakes(Set<Takes> takes) {
+		this.takes = takes;
 	}
 	
 	@Override
