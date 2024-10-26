@@ -16,7 +16,9 @@ import jakarta.persistence.Table;
 
 @NamedQueries(value = {
 		@NamedQuery(name = "updateSalarySetToFortyFiveK", query = "update Instructor i set i.salary = :nsalary"),
-		@NamedQuery(name = "updateBiologySalaryAddFiveK", query = "update Instructor i set i.salary = i.salary + :addamt where i.deptName = :deptname") })
+		@NamedQuery(name = "updateBiologySalaryAddFiveK", query = "update Instructor i set i.salary = i.salary + :addamt where i.deptName = :deptname"),
+		@NamedQuery(name = "updateSalaryNonBiology", query = "update Instructor i set i.salary = i.salary + (i.salary * :incperc) where i.deptName != :deptname")
+		})
 @Entity
 @Table(catalog = "university")
 public class Instructor {

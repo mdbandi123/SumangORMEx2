@@ -91,4 +91,44 @@ public class TeacherDao {
 		}
 		return false;
 	}
+	
+	public boolean updateSalaryNonBiology() {
+		LOGGER.info("executing updateSalaryNonBiology()...");
+		Double incPerc = 0.10;
+		String deptName = "Biology";
+		Session sess = sf.openSession();
+		Transaction txn = sess.beginTransaction();
+		try {
+			MutationQuery query = 
+					sess.createNamedMutationQuery("updateSalaryNonBiology");
+			query.setParameter("incperc", incPerc);
+			query.setParameter("deptname", deptName);
+			int rows = query.executeUpdate();
+			
+			txn.commit();
+			
+			LOGGER.info("executed updateSalaryNonBiology() successfully");
+			LOGGER.info("Updated %d records".formatted(rows));
+			return true;
+		} catch (Exception e) {
+			try {
+				LOGGER.error("encountered exception: %s".formatted(e));
+				LOGGER.info("rollback executing...");
+				txn.rollback();
+			} catch (Exception ee) {
+				LOGGER.error("encountered exception: %s".formatted(ee));
+				ee.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				LOGGER.info("session closing...");
+				sess.close();
+			} catch (Exception eee) {
+				LOGGER.error("encountered exception: %s".formatted(eee));
+				eee.printStackTrace();
+			}
+		}
+		return false;
+	}
 }

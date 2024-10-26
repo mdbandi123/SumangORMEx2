@@ -33,12 +33,22 @@ public class TestTeacherDao {
 		LOGGER.info("updateSalarySetToFortyFiveK() executed");
 	}
 	
+	@Disabled
 	@Test
-	public void updateBiologySalaryAddFiveK() {
+	public void testUpdateBiologySalaryAddFiveK() {
 		cfg.createConfiguration();
 		SessionFactory sf = cfg.getSessionFactory();
 		TeacherDao dao = new TeacherDao(sf);
 		dao.updateBiologySalaryAddFiveK();
 		LOGGER.info("updateBiologySalaryAddFiveK() executed");
+	}
+	
+	@Test
+	public void testUpdateSalaryNonBiology() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		TeacherDao dao = new TeacherDao(sf);
+		dao.updateSalaryNonBiology();
+		LOGGER.info("testUpdateSalaryNonBiology() executed");
 	}
 }
