@@ -36,7 +36,7 @@ public class Course {
 		this.title = title;
 	}
 
-	@Column(name = "dept_name", length = 20, insertable=false, updatable=false)
+	@Column(name = "dept_name", length = 20)
 	public String getDeptName() {
 		return deptName;
 	}
@@ -55,7 +55,7 @@ public class Course {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name="dept_name")
+	@JoinColumn(name="dept_name", insertable = false, updatable = false)
 	public Department getDepartment() {
 		return department;
 	}

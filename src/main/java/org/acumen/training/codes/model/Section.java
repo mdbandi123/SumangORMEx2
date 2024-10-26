@@ -61,8 +61,8 @@ public class Section {
 
 	@ManyToMany
 	@JoinTable(joinColumns = { 
-			@JoinColumn(name = "building", referencedColumnName = "building"),
-			@JoinColumn(name = "room_number", referencedColumnName = "room_number")
+			@JoinColumn(name = "building", referencedColumnName = "building", insertable = false, updatable = false),
+			@JoinColumn(name = "room_number", referencedColumnName = "room_number", insertable = false, updatable = false)
 			}
 	)
 	public Set<Classroom> getClassrooms() {
