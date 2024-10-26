@@ -1,0 +1,52 @@
+package org.acumen.training.codes.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
+import org.jboss.logging.Logger;
+
+public class TeacherDao {
+	private static Logger LOGGER = Logger.getLogger(TeacherDao.class);
+	private SessionFactory sf;
+
+	public TeacherDao(SessionFactory sf) {
+		this.sf = sf;
+	}
+
+	public boolean updateSalarySetToFortyFiveK() {
+		LOGGER.info("executing updateSalarySetToFortyFiveK()...");
+		Double newSalary = 45000.00;
+		Session sess = sf.openSession();
+		Transaction txn = sess.beginTransaction();
+		try {
+			MutationQuery query = 
+					sess.createNamedMutationQuery("updateSalarySetToFortyFiveK");
+			query.setParameter("nsalary", newSalary);
+			int rows = query.executeUpdate();
+			txn.commit();
+			LOGGER.info("executed updateSalarySetToFortyFiveK() successfully");
+			LOGGER.info("Updated %d records".formatted(rows));
+			return true;
+		} catch (Exception e) {
+			try {
+				LOGGER.error("encountered exception: %s".formatted(e));
+				LOGGER.info("rollback executing...");
+				txn.rollback();
+			} catch (Exception ee) {
+				LOGGER.error("encountered exception: %s".formatted(ee));
+				ee.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				LOGGER.info("session closing...");
+				sess.close();
+			} catch (Exception eee) {
+				LOGGER.error("encountered exception: %s".formatted(eee));
+				eee.printStackTrace();
+			}
+		}
+		return false;
+	}
+}

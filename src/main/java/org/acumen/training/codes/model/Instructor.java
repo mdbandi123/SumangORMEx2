@@ -9,9 +9,16 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+@NamedQueries(value = {
+		@NamedQuery(name = "updateSalarySetToFortyFiveK", 
+				query = "update Instructor i set i.salary = :nsalary") 
+		}
+)
 @Entity
 @Table(catalog = "university")
 public class Instructor {
@@ -19,10 +26,10 @@ public class Instructor {
 	private String name;
 	private String deptName;
 	private Double salary;
-	
+
 	private Set<Teaches> teaches;
 	private Set<Advisor> advisors;
-	
+
 	private Department department;
 
 	@Id
@@ -61,16 +68,16 @@ public class Instructor {
 	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
-	
+
 	@OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.REMOVE })
 	public Set<Teaches> getTeaches() {
 		return teaches;
 	}
-	
+
 	public void setTeaches(Set<Teaches> teaches) {
 		this.teaches = teaches;
 	}
-	
+
 	@ManyToOne
 	@JoinColumn(name = "dept_name", insertable = false, updatable = false)
 	public Department getDepartment() {
@@ -80,7 +87,7 @@ public class Instructor {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-	
+
 	@OneToMany(mappedBy = "instructor")
 	public Set<Advisor> getAdvisors() {
 		return advisors;
@@ -89,7 +96,7 @@ public class Instructor {
 	public void setAdvisors(Set<Advisor> advisors) {
 		this.advisors = advisors;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "%s %s %s %f".formatted(id, name, deptName, salary);
