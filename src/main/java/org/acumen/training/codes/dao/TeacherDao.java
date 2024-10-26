@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.MutationQuery;
 import org.hibernate.query.Query;
+import org.hibernate.query.SelectionQuery;
 import org.jboss.logging.Logger;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -157,6 +158,68 @@ public class TeacherDao {
 			recs = query.getResultList();
 			
 			LOGGER.info("executed queryMaxSalaryPerDept() successfully");
+			return recs;
+		} catch (Exception e) {
+			try {
+				LOGGER.error("encountered exception: %s".formatted(e));
+				LOGGER.info("rollback executing...");
+			} catch (Exception ee) {
+				LOGGER.error("encountered exception: %s".formatted(ee));
+				ee.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				LOGGER.info("session closing...");
+				sess.close();
+			} catch (Exception eee) {
+				LOGGER.error("encountered exception: %s".formatted(eee));
+				eee.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public List<Object[]> queryNumOfStudPerDept() {
+		LOGGER.info("executing queryNumOfStudPerDept()...");
+		List<Object[]> recs;
+		Session sess = sf.openSession();
+		try {
+			SelectionQuery<Object[]> query = sess.createNamedQuery("queryNumOfStudPerDept", Object[].class);
+			recs = query.getResultList();
+			
+			LOGGER.info("executed queryNumOfStudPerDept() successfully");
+			return recs;
+		} catch (Exception e) {
+			try {
+				LOGGER.error("encountered exception: %s".formatted(e));
+				LOGGER.info("rollback executing...");
+			} catch (Exception ee) {
+				LOGGER.error("encountered exception: %s".formatted(ee));
+				ee.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				LOGGER.info("session closing...");
+				sess.close();
+			} catch (Exception eee) {
+				LOGGER.error("encountered exception: %s".formatted(eee));
+				eee.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public List<Object[]> queryTotalStudsPerInstructor() {
+		LOGGER.info("executing queryTotalStudsPerInstructor()...");
+		List<Object[]> recs;
+		Session sess = sf.openSession();
+		try {
+			SelectionQuery<Object[]> query = sess.createNamedQuery("queryTotalStudsPerInstructor", Object[].class);
+			recs = query.getResultList();
+			
+			LOGGER.info("executed queryTotalStudsPerInstructor() successfully");
 			return recs;
 		} catch (Exception e) {
 			try {

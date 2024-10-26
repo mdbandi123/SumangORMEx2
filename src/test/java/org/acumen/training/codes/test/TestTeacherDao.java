@@ -15,17 +15,17 @@ import org.junit.jupiter.api.Test;
 public class TestTeacherDao {
 	private static Logger LOGGER = Logger.getLogger(TestTeacherDao.class);
 	private UnivConfiguration cfg;
-	
+
 	@BeforeEach()
 	public void setup() {
 		cfg = new UnivConfiguration();
 	}
-	
+
 	@AfterEach()
 	public void teardown() {
 		cfg = null;
 	}
-	
+
 	@Disabled
 	@Test
 	public void testUnivConfiguration() {
@@ -35,7 +35,7 @@ public class TestTeacherDao {
 		dao.updateSalarySetToFortyFiveK();
 		LOGGER.info("updateSalarySetToFortyFiveK() executed");
 	}
-	
+
 	@Disabled
 	@Test
 	public void testUpdateBiologySalaryAddFiveK() {
@@ -45,7 +45,7 @@ public class TestTeacherDao {
 		dao.updateBiologySalaryAddFiveK();
 		LOGGER.info("updateBiologySalaryAddFiveK() executed");
 	}
-	
+
 	@Disabled
 	@Test
 	public void testUpdateSalaryNonBiology() {
@@ -55,16 +55,42 @@ public class TestTeacherDao {
 		dao.updateSalaryNonBiology();
 		LOGGER.info("testUpdateSalaryNonBiology() executed");
 	}
-	
+
+	@Disabled
 	@Test
 	public void testQueryMaxSalaryPerDept() {
 		cfg.createConfiguration();
 		SessionFactory sf = cfg.getSessionFactory();
 		TeacherDao dao = new TeacherDao(sf);
-		List<Object[]> data =dao.queryMaxSalaryPerDept();
+		List<Object[]> data = dao.queryMaxSalaryPerDept();
 		data.stream().forEach((rec) -> {
 			System.out.println(Arrays.toString(rec));
 		});
 		LOGGER.info("testQueryMaxSalaryPerDept() executed");
+	}
+
+	@Disabled
+	@Test
+	public void testQueryNumOfStudPerDept() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		TeacherDao dao = new TeacherDao(sf);
+		List<Object[]> data = dao.queryNumOfStudPerDept();
+		data.stream().forEach((rec) -> {
+			System.out.println(Arrays.toString(rec));
+		});
+		LOGGER.info("testQueryNumOfStudPerDept() executed");
+	}
+	
+	@Test
+	public void queryTotalStudsPerInstructor() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		TeacherDao dao = new TeacherDao(sf);
+		List<Object[]> data = dao.queryTotalStudsPerInstructor();
+		data.stream().forEach((rec) -> {
+			System.out.println(Arrays.toString(rec));
+		});
+		LOGGER.info("testQueryNumOfStudPerDept() executed");
 	}
 }

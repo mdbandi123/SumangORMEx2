@@ -5,9 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQueries;
+import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+@NamedNativeQueries(value = {
+		@NamedNativeQuery(name = "getTotalEnrolledPerCourse", query = "select a.title, count(b.id)  from course a left join takes b on a.course_id = b.course_id group by a.title;")
+})
 @Entity
 @Table(catalog = "university")
 public class Course {
