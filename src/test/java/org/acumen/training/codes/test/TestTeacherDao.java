@@ -1,5 +1,8 @@
 package org.acumen.training.codes.test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.acumen.training.codes.UnivConfiguration;
 import org.acumen.training.codes.dao.TeacherDao;
 import org.hibernate.SessionFactory;
@@ -43,6 +46,7 @@ public class TestTeacherDao {
 		LOGGER.info("updateBiologySalaryAddFiveK() executed");
 	}
 	
+	@Disabled
 	@Test
 	public void testUpdateSalaryNonBiology() {
 		cfg.createConfiguration();
@@ -50,5 +54,17 @@ public class TestTeacherDao {
 		TeacherDao dao = new TeacherDao(sf);
 		dao.updateSalaryNonBiology();
 		LOGGER.info("testUpdateSalaryNonBiology() executed");
+	}
+	
+	@Test
+	public void testQueryMaxSalaryPerDept() {
+		cfg.createConfiguration();
+		SessionFactory sf = cfg.getSessionFactory();
+		TeacherDao dao = new TeacherDao(sf);
+		List<Object[]> data =dao.queryMaxSalaryPerDept();
+		data.stream().forEach((rec) -> {
+			System.out.println(Arrays.toString(rec));
+		});
+		LOGGER.info("testQueryMaxSalaryPerDept() executed");
 	}
 }
