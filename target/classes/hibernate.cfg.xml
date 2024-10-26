@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" 
+             "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- JDBC Configuration details -->
+		<property name="connection.driver.class">org.postgresql.Driver</property>
+		<property name="connection.url">jdbc:postgresql://localhost:5432/university</property>
+		<property name="connection.username">postgres</property>
+		<property name="connection.password">admin2255</property>
+
+		<!-- Hibernte property configuration -->
+		<property name="show_sql">true</property>
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+		<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+		<property name="hibernate.dataSource.driverClassName">org.postgresql.Driver</property>
+		<property name="hibernate.dataSource.user">postgres</property>
+		<property name="hibernate.dataSource.password">admin2255</property>
+		<property name="hibernate.dataSource.jdbcUrl">jdbc:postgresql://localhost:5432/university</property>
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">50</property>
+		<property name="hibernate.c3p0.timeout">120</property>
+		<property name="hibernate.c3p0.max_statements">5</property>
+
+		<!-- Registration model classes -->
+		<mapping class="org.acumen.training.codes.model.Advisor" />
+		<mapping class="org.acumen.training.codes.model.Classroom" />
+		<mapping class="org.acumen.training.codes.model.Course" />
+		<mapping class="org.acumen.training.codes.model.Department" />
+		<mapping class="org.acumen.training.codes.model.Instructor" />
+		<mapping class="org.acumen.training.codes.model.Prereq" />
+		<mapping class="org.acumen.training.codes.model.Section" />
+		<mapping class="org.acumen.training.codes.model.Student" />
+		<mapping class="org.acumen.training.codes.model.Takes" />
+		<mapping class="org.acumen.training.codes.model.Teaches" />
+		<mapping class="org.acumen.training.codes.model.TimeSlot" />
+
+		<mapping
+			class="org.acumen.training.codes.model.compositekeys.ClassroomId" />
+		<mapping
+			class="org.acumen.training.codes.model.compositekeys.PrereqId" />
+		<mapping
+			class="org.acumen.training.codes.model.compositekeys.SectionId" />
+		<mapping
+			class="org.acumen.training.codes.model.compositekeys.TakesId" />
+		<mapping
+			class="org.acumen.training.codes.model.compositekeys.TeachesId" />
+		<mapping
+			class="org.acumen.training.codes.model.compositekeys.TimeSlotId" />
+	</session-factory>
+</hibernate-configuration>
