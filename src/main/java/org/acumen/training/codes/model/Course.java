@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +17,8 @@ public class Course {
 	private Integer credits;
 	
 	private Department department;
+	private Prereq prereqCID;
+	private Prereq prereqPID;
 
 	@Id
 	@Column(name = "course_id", unique = true, length = 8)
@@ -64,9 +67,26 @@ public class Course {
 		this.department = department;
 	}
 	
+	@OneToOne(mappedBy = "courseId")
+	public Prereq getPrereqCID() {
+		return prereqCID;
+	}
+
+	public void setPrereqCID(Prereq prereqCID) {
+		this.prereqCID = prereqCID;
+	}
+
+	@OneToOne(mappedBy = "prereqId")
+	public Prereq getPrereqPID() {
+		return prereqPID;
+	}
+
+	public void setPrereqPID(Prereq prereqPID) {
+		this.prereqPID = prereqPID;
+	}
+
 	@Override
 	public String toString() {
 		return "%s %s %s %d".formatted(courseId,title,deptName,credits);
 	}
-
 }
