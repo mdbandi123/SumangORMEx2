@@ -26,11 +26,11 @@ public class TestCourseDao {
 	}
 	
 	@Test
-	public void testGetTotalEnrolledPerCourse() {
+	public void testQueryTotalEnrolledPerCourse() {
 		cfg.createConfiguration();
 		SessionFactory sf = cfg.getSessionFactory();
 		CourseDao dao = new CourseDao(sf);
-		List<Object[]> data = dao.getTotalEnrolledPerCourse();
+		List<Object[]> data = dao.queryTotalEnrolledPerCourse();
 		data.stream().forEach((rec) -> {
 			System.out.println(Arrays.toString(rec));
 		});

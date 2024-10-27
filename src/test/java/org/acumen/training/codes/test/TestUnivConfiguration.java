@@ -10,7 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestUnivConfiguration {
-	private static final Logger LOGGER = Logger.getLogger(TestUnivConfiguration.class);
+	private static final Logger LOGGER = 
+			Logger.getLogger(TestUnivConfiguration.class);
 	private UnivConfiguration cfg;
 	
 	@BeforeEach()
@@ -25,7 +26,6 @@ public class TestUnivConfiguration {
 	
 	@Test
 	public void testUnivConfiguration() {
-		LOGGER.info("executing testUnivConfiguration()");
 		assertEquals(true,cfg.createConfiguration());
 		assertNotNull(cfg.getSessionFactory());
 		LOGGER.info("testUnivConfiguration() executed");

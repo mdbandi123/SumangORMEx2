@@ -28,7 +28,7 @@ public class TestTeacherDao {
 
 	@Disabled
 	@Test
-	public void testUnivConfiguration() {
+	public void testUpdateSalarySetToFortyFiveK() {
 		cfg.createConfiguration();
 		SessionFactory sf = cfg.getSessionFactory();
 		TeacherDao dao = new TeacherDao(sf);
@@ -56,7 +56,6 @@ public class TestTeacherDao {
 		LOGGER.info("testUpdateSalaryNonBiology() executed");
 	}
 
-	@Disabled
 	@Test
 	public void testQueryMaxSalaryPerDept() {
 		cfg.createConfiguration();
@@ -67,19 +66,6 @@ public class TestTeacherDao {
 			System.out.println(Arrays.toString(rec));
 		});
 		LOGGER.info("testQueryMaxSalaryPerDept() executed");
-	}
-
-	@Disabled
-	@Test
-	public void testQueryNumOfStudPerDept() {
-		cfg.createConfiguration();
-		SessionFactory sf = cfg.getSessionFactory();
-		TeacherDao dao = new TeacherDao(sf);
-		List<Object[]> data = dao.queryNumOfStudPerDept();
-		data.stream().forEach((rec) -> {
-			System.out.println(Arrays.toString(rec));
-		});
-		LOGGER.info("testQueryNumOfStudPerDept() executed");
 	}
 	
 	@Test

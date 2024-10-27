@@ -17,13 +17,22 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @NamedQueries(value = {
-		@NamedQuery(name = "updateSalarySetToFortyFiveK", query = "update Instructor i set i.salary = :nsalary"),
-		@NamedQuery(name = "updateBiologySalaryAddFiveK", query = "update Instructor i set i.salary = i.salary + :addamt where i.deptName = :deptname"),
-		@NamedQuery(name = "updateSalaryNonBiology", query = "update Instructor i set i.salary = i.salary + (i.salary * :incperc) where i.deptName != :deptname")
+		@NamedQuery(name = "updateSalarySetToFortyFiveK", 
+				query = "update Instructor i set i.salary = :nsalary"),
+		@NamedQuery(name = "updateBiologySalaryAddFiveK", 
+				query = "update Instructor i set i.salary = i.salary + :addamt "
+						+ "where i.deptName = :deptname"),
+		@NamedQuery(name = "updateSalaryNonBiology", 
+				query = "update Instructor i "
+						+ "set i.salary = i.salary + (i.salary * :incperc) "
+						+ "where i.deptName != :deptname")
 		})
 @NamedNativeQueries(value = {
-		@NamedNativeQuery(name = "queryNumOfStudPerDept", query = "select i.id, i.name, count(distinct t.id) as totalStudents from instructor i left join teaches te on i.ID = te.ID left join takes t on te.course_id = t.course_id and te.sec_id = t.sec_id and te.semester = t.semester and te.year = t.year group by i.id, i.name; "),
-		@NamedNativeQuery(name = "queryTotalStudsPerInstructor", query = "select a.dept_name, count(b.name) from department a left join student b on a.dept_name = b.dept_name group by a.dept_name;")
+		@NamedNativeQuery(name = "queryTotalStudsPerInstructor", 
+				query = "select d.dept_name, count(i.name) "
+						+ "from department d left join student i "
+						+ "on d.dept_name = i.dept_name "
+						+ "group by d.dept_name;")
 })
 @Entity
 @Table(catalog = "university")

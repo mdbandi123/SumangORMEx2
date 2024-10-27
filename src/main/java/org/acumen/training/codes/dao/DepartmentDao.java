@@ -16,15 +16,18 @@ public class DepartmentDao {
 		this.sf = sf;
 	}
 	
-	public List<Object[]> getTeacherCountAndAvgSalPerDept(){
-		LOGGER.info("executing getTeacherCountAndAvgSalPerDept()...");
+	public List<Object[]> queryTeacherCountAndAvgSalPerDept(){
+		LOGGER.info("executing queryTeacherCountAndAvgSalPerDept()...");
 		List<Object[]> recs = new ArrayList<>();
 		
 		try (Session sess = sf.openSession();){
-			SelectionQuery<Object[]> query = sess.createNamedQuery("getTeacherCountAndAvgSalPerDept", Object[].class);
+			SelectionQuery<Object[]> query = 
+					sess.createNamedQuery("queryTeacherCountAndAvgSalPerDept", 
+										Object[].class);
 			recs = query.getResultList();
 			
-			LOGGER.info("executed getTeacherCountAndAvgSalPerDept() successfully");
+			LOGGER.info("executed queryTeacherCountAndAvgSalPerDept() "
+					+ "successfully");
 			return recs;
 		} catch (Exception e) {
 			LOGGER.error("encountered exception: %s".formatted(e));
@@ -34,15 +37,17 @@ public class DepartmentDao {
 		return recs;
 	}
 	
-	public List<Object[]> getTeacherCountPerDept(){
-		LOGGER.info("executing getTeacherCountPerDept()...");
+	public List<Object[]> queryTeacherCountPerDept(){
+		LOGGER.info("executing queryTeacherCountPerDept()...");
 		List<Object[]> recs = new ArrayList<>();
 		
 		try (Session sess = sf.openSession();){
-			SelectionQuery<Object[]> query = sess.createNamedQuery("getTeacherCountPerDept", Object[].class);
+			SelectionQuery<Object[]> query = 
+					sess.createNamedQuery("queryTeacherCountPerDept", 
+										Object[].class);
 			recs = query.getResultList();
 			
-			LOGGER.info("executed getTeacherCountPerDept() successfully");
+			LOGGER.info("executed queryTeacherCountPerDept() successfully");
 			return recs;
 		} catch (Exception e) {
 			LOGGER.error("encountered exception: %s".formatted(e));

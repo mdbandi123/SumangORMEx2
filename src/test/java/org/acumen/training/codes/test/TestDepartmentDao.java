@@ -9,11 +9,11 @@ import org.hibernate.SessionFactory;
 import org.jboss.logging.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class TestDepartmentDao {
-	private static Logger LOGGER = Logger.getLogger(TestDepartmentDao.class);
+	private static Logger LOGGER = 
+			Logger.getLogger(TestDepartmentDao.class);
 	private UnivConfiguration cfg;
 
 	@BeforeEach()
@@ -26,28 +26,27 @@ public class TestDepartmentDao {
 		cfg = null;
 	}
 	
-	@Disabled
 	@Test
-	public void testGetTeacherCountAndAvgSalPerDept() {
+	public void testQueryTeacherCountAndAvgSalPerDept() {
 		cfg.createConfiguration();
 		SessionFactory sf = cfg.getSessionFactory();
 		DepartmentDao dao = new DepartmentDao(sf);
-		List<Object[]> data = dao.getTeacherCountAndAvgSalPerDept();
+		List<Object[]> data = dao.queryTeacherCountAndAvgSalPerDept();
 		data.stream().forEach((rec) -> {
 			System.out.println(Arrays.toString(rec));
 		});
-		LOGGER.info("testGetTeacherCountAndAvgSalPerDept() executed");
+		LOGGER.info("testQueryTeacherCountAndAvgSalPerDept() executed");
 	}
 	
 	@Test
-	public void testGetTeacherCountPerDept() {
+	public void testQueryTeacherCountPerDept() {
 		cfg.createConfiguration();
 		SessionFactory sf = cfg.getSessionFactory();
 		DepartmentDao dao = new DepartmentDao(sf);
-		List<Object[]> data = dao.getTeacherCountPerDept();
+		List<Object[]> data = dao.queryTeacherCountPerDept();
 		data.stream().forEach((rec) -> {
 			System.out.println(Arrays.toString(rec));
 		});
-		LOGGER.info("testGetTeacherCountPerDept() executed");
+		LOGGER.info("testQueryTeacherCountPerDept() executed");
 	}
 }

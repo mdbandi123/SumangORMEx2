@@ -16,15 +16,16 @@ public class CourseDao {
 		this.sf = sf;
 	}
 	
-	public List<Object[]> getTotalEnrolledPerCourse(){
-		LOGGER.info("executing getTotalEnrolledPerCourse()...");
+	public List<Object[]> queryTotalEnrolledPerCourse(){
+		LOGGER.info("executing queryTotalEnrolledPerCourse()...");
 		List<Object[]> recs = new ArrayList<>();
 		
 		try (Session sess = sf.openSession();){
-			SelectionQuery<Object[]> query = sess.createNamedQuery("getTotalEnrolledPerCourse", Object[].class);
+			SelectionQuery<Object[]> query = 
+					sess.createNamedQuery("queryTotalEnrolledPerCourse", Object[].class);
 			recs = query.getResultList();
 			
-			LOGGER.info("executed getTotalEnrolledPerCourse() successfully");
+			LOGGER.info("executed queryTotalEnrolledPerCourse() successfully");
 			return recs;
 		} catch (Exception e) {
 			LOGGER.error("encountered exception: %s".formatted(e));

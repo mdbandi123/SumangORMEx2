@@ -28,6 +28,7 @@ public class TeacherDao {
 		Double newSalary = 45000.00;
 		Session sess = sf.openSession();
 		Transaction txn = sess.beginTransaction();
+		
 		try {
 			MutationQuery query = 
 					sess.createNamedMutationQuery("updateSalarySetToFortyFiveK");
@@ -58,6 +59,7 @@ public class TeacherDao {
 				eee.printStackTrace();
 			}
 		}
+		
 		return false;
 	}
 	
@@ -67,6 +69,7 @@ public class TeacherDao {
 		String deptName = "Biology";
 		Session sess = sf.openSession();
 		Transaction txn = sess.beginTransaction();
+		
 		try {
 			MutationQuery query = 
 					sess.createNamedMutationQuery("updateBiologySalaryAddFiveK");
@@ -98,6 +101,7 @@ public class TeacherDao {
 				eee.printStackTrace();
 			}
 		}
+		
 		return false;
 	}
 	
@@ -107,6 +111,7 @@ public class TeacherDao {
 		String deptName = "Biology";
 		Session sess = sf.openSession();
 		Transaction txn = sess.beginTransaction();
+		
 		try {
 			MutationQuery query = 
 					sess.createNamedMutationQuery("updateSalaryNonBiology");
@@ -138,11 +143,12 @@ public class TeacherDao {
 				eee.printStackTrace();
 			}
 		}
+		
 		return false;
 	}
 	
 	public List<Object[]> queryMaxSalaryPerDept() {
-		LOGGER.info("executing queryMaxSalaryPerDept)...");
+		LOGGER.info("executing queryMaxSalaryPerDept()...");
 		List<Object[]> recs;
 		Session sess = sf.openSession();
 		try {
@@ -179,38 +185,7 @@ public class TeacherDao {
 		}
 		return null;
 	}
-	
-	public List<Object[]> queryNumOfStudPerDept() {
-		LOGGER.info("executing queryNumOfStudPerDept()...");
-		List<Object[]> recs;
-		Session sess = sf.openSession();
-		try {
-			SelectionQuery<Object[]> query = sess.createNamedQuery("queryNumOfStudPerDept", Object[].class);
-			recs = query.getResultList();
-			
-			LOGGER.info("executed queryNumOfStudPerDept() successfully");
-			return recs;
-		} catch (Exception e) {
-			try {
-				LOGGER.error("encountered exception: %s".formatted(e));
-				LOGGER.info("rollback executing...");
-			} catch (Exception ee) {
-				LOGGER.error("encountered exception: %s".formatted(ee));
-				ee.printStackTrace();
-			}
-			e.printStackTrace();
-		} finally {
-			try {
-				LOGGER.info("session closing...");
-				sess.close();
-			} catch (Exception eee) {
-				LOGGER.error("encountered exception: %s".formatted(eee));
-				eee.printStackTrace();
-			}
-		}
-		return null;
-	}
-	
+		
 	public List<Object[]> queryTotalStudsPerInstructor() {
 		LOGGER.info("executing queryTotalStudsPerInstructor()...");
 		List<Object[]> recs;

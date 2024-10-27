@@ -11,8 +11,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @NamedNativeQueries(value = {
-		@NamedNativeQuery(name = "getTeacherCountAndAvgSalPerDept",query = "select a.dept_name, count(b.name), coalesce(avg(b.salary),0.0) from department a left join instructor b on a.dept_name = b.dept_name group by a.dept_name;"),
-		@NamedNativeQuery(name = "getTeacherCountPerDept",query = "select a.dept_name, count(b.name) from department a left join instructor b on a.dept_name = b.dept_name group by a.dept_name;")
+		@NamedNativeQuery(name = "queryTeacherCountAndAvgSalPerDept",
+				query = "select d.dept_name, count(i.name), coalesce(avg(i.salary),0.0) "
+						+ "from department d left join instructor i "
+						+ "on d.dept_name = i.dept_name "
+						+ "group by d.dept_name;"),
+		@NamedNativeQuery(name = "queryTeacherCountPerDept", 
+				query = "select d.dept_name, count(i.name) "
+						+ "from department d left join instructor i "
+						+ "on d.dept_name = i.dept_name "
+						+ "group by d.dept_name;")
 })
 @Entity
 @Table(catalog = "university")
