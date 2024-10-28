@@ -26,7 +26,6 @@ public class TestTeacherDao {
 		cfg = null;
 	}
 
-	@Disabled
 	@Test
 	public void testUpdateSalarySetToFortyFiveK() {
 		cfg.createConfiguration();
@@ -36,7 +35,6 @@ public class TestTeacherDao {
 		LOGGER.info("updateSalarySetToFortyFiveK() executed");
 	}
 
-	@Disabled
 	@Test
 	public void testUpdateBiologySalaryAddFiveK() {
 		cfg.createConfiguration();
@@ -46,7 +44,6 @@ public class TestTeacherDao {
 		LOGGER.info("updateBiologySalaryAddFiveK() executed");
 	}
 
-	@Disabled
 	@Test
 	public void testUpdateSalaryNonBiology() {
 		cfg.createConfiguration();
@@ -67,7 +64,7 @@ public class TestTeacherDao {
 		});
 		LOGGER.info("testQueryMaxSalaryPerDept() executed");
 	}
-	
+
 	@Test
 	public void queryTotalStudsPerInstructor() {
 		cfg.createConfiguration();
@@ -77,6 +74,6 @@ public class TestTeacherDao {
 		data.stream().forEach((rec) -> {
 			System.out.println(Arrays.toString(rec));
 		});
-		LOGGER.info("testQueryNumOfStudPerDept() executed");
+		LOGGER.info("testQueryTotalStudsPerInstructor() executed");
 	}
 }

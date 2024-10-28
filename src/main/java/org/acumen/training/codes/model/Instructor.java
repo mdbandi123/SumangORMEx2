@@ -29,10 +29,14 @@ import jakarta.persistence.Table;
 		})
 @NamedNativeQueries(value = {
 		@NamedNativeQuery(name = "queryTotalStudsPerInstructor", 
-				query = "select d.dept_name, count(i.name) "
-						+ "from department d left join student i "
-						+ "on d.dept_name = i.dept_name "
-						+ "group by d.dept_name;")
+				query = "select i.name, count(distinct t.id) "
+						+ "from instructor i left join teaches te "
+						+ "on i.id = te.id left join takes t "
+						+ "on te.course_id = t.course_id "
+						+ "and te.sec_id = t.sec_id "
+						+ "and te.semester = t.semester "
+						+ "and te.year = t.year "
+						+ "group by i.id, i.name; "),
 })
 @Entity
 @Table(catalog = "university")
